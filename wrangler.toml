@@ -1,0 +1,20 @@
+name = "stock-alert-worker"
+main = "src/index.ts"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# Cron triggers - run every 15 minutes during Vietnam trading hours (7:00-15:30 UTC+7 = 0:00-8:30 UTC)
+[triggers]
+crons = [
+  "*/15 0-8 * * 1-5",   # Mon-Fri, 07:00-15:45 Vietnam time (UTC+7)
+]
+
+[[kv_namespaces]]
+binding = "STOCK_KV"
+id = "c352990e523447edb22884bd0ac0b9fa"
+
+[vars]
+NTFY_TOPIC = "stock-alert-vn-tran46698-private"  # ⚠️ Đổi thành tên khó đoán của riêng bạn!
+
+# Optional: set via wrangler secret put
+# NTFY_TOPIC is public so use a hard-to-guess name
